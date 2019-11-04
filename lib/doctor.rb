@@ -11,6 +11,23 @@ class Doctor
     def self.all
         @@all
     end
+
+    def appointments
+        Appointment.all.select do |appointment|
+            appointment.doctor
+        end
+    end
+
+    def new_appointment(patient, date)
+        # binding.pry
+        Appointment.new(date, patient, self)
+    end
+
+    def patients
+        self.appointments.map do |appointment|
+          appointment.patient
+        end
+    end
     # instance of the Patient class and a date, 
     #instance method new appointment
     # and creates a new Appointment0
